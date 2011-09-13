@@ -1,0 +1,22 @@
+# Common make definitions, customized for each platform
+
+# Definitions required in all program directories to compile and link
+# C programs using gcc.
+
+WKDIR     = /home/jervis/Documents/tinyweb
+AR        = ar
+RANLIB    = ranlib
+CC        = gcc
+COMPILE.c = $(CC) -c $(CFLAGS) $(CPPFLAGS)
+LINK.c    = $(CC) $(LDDIR) $(LDFLAGS)
+LDDIR     = -L../lib
+LDLIBS    = ../lib/libj.a $(EXTRALIBS)
+CFLAGS    = -DLINUX -D_REENTRANT -std=c99 -I$(WKDIR)/include -Wall -D_GNU_SOURCE -g -D__EN_DBG $(EXTRA) #-pg
+EXTRA     = -finstrument-functions
+EXTRALIBS = -lpthread -lcurses
+
+# Our library that almost every program needs.
+LIB       = ../libj.a
+
+# Common temp files to delete from each directory.
+TEMPFILES = core core.* *.o temp.* *.out typescript* *.d
